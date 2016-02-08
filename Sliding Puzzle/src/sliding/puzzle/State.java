@@ -13,7 +13,8 @@ import java.util.Arrays;
  */
 public class State {
     private int board[][];
-    
+    private int step;
+    private State parent;
     private int blankRow;
     private int blankCol;
     
@@ -29,6 +30,8 @@ public class State {
                 }
             }
         }
+        step = 0;
+        parent = null;
     }
 
     @Override
@@ -70,12 +73,14 @@ public class State {
         state.setCell(blankRow, blankCol, board[nextRow][nextCol]);
         state.blankRow = nextRow;
         state.blankCol = nextCol;
+        state.step = this.step + 1;
+        state.parent = this;
         return state;
     }
     
     @Override
     public String toString() {
-        String output = "";
+        String output = "Step " + step + "\n";
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[r].length; c++)
                 if (board[r][c] == board.length * board[r].length)
@@ -85,6 +90,23 @@ public class State {
         }
         return output;
     }
+
+    public int map() {
+        int value = 0;
+        for (int r = 0; r < board.length; r++)
+            for (int c = 0; c < board[r].length; c++) {
+                value = value * 10;
+                value = value + board[r][c];
+            }
+        return value;
+    }
     
-    
+    public int getStep() {
+        return step;
+    }
+
+    public State getParent() {
+        return parent;
+    }
+   
 }
