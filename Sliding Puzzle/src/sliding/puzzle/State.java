@@ -5,6 +5,8 @@
  */
 package sliding.puzzle;
 
+import java.util.Arrays;
+
 /**
  *
  * @author kmhasan
@@ -27,6 +29,30 @@ public class State {
                 }
             }
         }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final State other = (State) obj;
+        if (!Arrays.deepEquals(this.board, other.board)) {
+            return false;
+        }
+        return true;
     }
 
     public void setCell(int row, int col, int value) {
