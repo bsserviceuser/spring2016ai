@@ -45,7 +45,7 @@ public class UnoptimizedBacktrackingNQueenSolver extends NQueenSolver {
             for (int previousColumn = 0; previousColumn < currentColumn; previousColumn++) {
                 int dx = Math.abs(currentColumn - previousColumn);
                 int dy = Math.abs(positions[currentColumn] - positions[previousColumn]);
-                if (positions[previousColumn] == currentRow || dx == dy) {
+                if (dy == 0 || dx == dy) {
                     isConflicting = true;
                     break;
                 }
