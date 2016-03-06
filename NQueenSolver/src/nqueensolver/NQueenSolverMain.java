@@ -32,5 +32,4 @@ public class NQueenSolverMain {
         System.out.println(Arrays.toString(solution));
         System.out.printf("Time taken: %.3f seconds\n", (stopTime - startTime) / 1000.0);
     }
-    
 }

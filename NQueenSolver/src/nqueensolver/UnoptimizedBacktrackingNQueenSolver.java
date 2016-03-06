@@ -55,5 +55,4 @@ public class UnoptimizedBacktrackingNQueenSolver extends NQueenSolver {
             backtrack(positions, currentColumn + 1);
         }
     }
-    
 }

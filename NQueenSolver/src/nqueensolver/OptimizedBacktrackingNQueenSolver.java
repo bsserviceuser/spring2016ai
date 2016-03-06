@@ -62,5 +62,4 @@ public class OptimizedBacktrackingNQueenSolver extends NQueenSolver {
             inverseDiagonalTaken[inverseDiagonalNumber] = false;
         }
     }
-    
 }

@@ -14,3 +14,4 @@ import java.util.ArrayList;
 public abstract class NQueenSolver {
     public abstract int[] getSolution(int n);
 }
+
