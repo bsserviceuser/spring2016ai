@@ -21,39 +21,81 @@ import java.util.logging.Logger;
 import org.primefaces.json.JSONArray;
 import org.primefaces.json.JSONException;
 import org.primefaces.json.JSONObject;
+
 /**
  *
  * @author kmhasan
  */
 public class InputReaderSingleton {
+
     private static final InputReaderSingleton instance = new InputReaderSingleton();
     private static ArrayList<Student> students;
-    
+    private static ArrayList<Course> courses;
+
     private InputReaderSingleton() {
         students = new ArrayList<>();
+        courses = new ArrayList<>();
         readStudents();
+        readCourses();
     }
-    
-    public ArrayList<Course> getCourses() {
-        return null;
+
+    public static ArrayList<Course> getCourses() {
+        return courses;
     }
-    
+
     public ArrayList<ExamSlot> getExamSlots() {
         return null;
     }
-    
+
     public ArrayList<Faculty> getFaculties() {
         return null;
     }
-    
+
     public ArrayList<Room> getRooms() {
         return null;
     }
-    
+
     public static ArrayList<Student> getStudents() {
         return students;
     }
-    
+
+    private void readCourses() {
+        try {
+            URL jsonURL = new URL("http://my.seu.ac.bd/~kmhasan/_WebServices_/list_courses.php");
+            BufferedReader input = new BufferedReader(new InputStreamReader(jsonURL.openStream()));
+            // uncomment the following line if reading from a local file
+            // RandomAccessFile input = new RandomAccessFile("students.json", "r");
+            String json = "";
+
+            while (true) {
+                String line = input.readLine();
+                if (line == null) {
+                    break;
+                }
+                if (line.length() == 0) {
+                    continue;
+                }
+
+                json += line;
+            }
+            JSONObject jsonObject = new JSONObject(json);
+            JSONArray jsonArray = jsonObject.getJSONArray("courses");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                jsonObject = jsonArray.getJSONObject(i);
+                System.err.println(jsonObject);
+                System.err.println(jsonObject.getString("Course Code"));
+                System.err.println(jsonObject.getString("Title"));
+                System.err.println(jsonObject.getInt("Section"));
+                Course course = new Course(jsonObject.getString("Course Code"), jsonObject.getString("Title"), jsonObject.getInt("Section"));
+                courses.add(course);
+            }
+        } catch (JSONException ex) {
+            Logger.getLogger(InputReaderSingleton.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(InputReaderSingleton.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     private void readStudents() {
         try {
             URL jsonURL = new URL("http://my.seu.ac.bd/~kmhasan/_WebServices_/list_students.php");
@@ -61,12 +103,16 @@ public class InputReaderSingleton {
             // uncomment the following line if reading from a local file
             // RandomAccessFile input = new RandomAccessFile("students.json", "r");
             String json = "";
-            
+
             while (true) {
                 String line = input.readLine();
-                if (line == null) break;
-                if (line.length() == 0) continue;
-                    
+                if (line == null) {
+                    break;
+                }
+                if (line.length() == 0) {
+                    continue;
+                }
+
                 json += line;
             }
             JSONObject jsonObject = new JSONObject(json);
@@ -82,4 +128,5 @@ public class InputReaderSingleton {
             Logger.getLogger(InputReaderSingleton.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

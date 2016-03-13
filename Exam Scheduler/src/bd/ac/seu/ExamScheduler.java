@@ -5,6 +5,7 @@
  */
 package bd.ac.seu;
 
+import bd.ac.seu.model.Course;
 import bd.ac.seu.model.Student;
 import java.util.ArrayList;
 
@@ -19,8 +20,11 @@ public class ExamScheduler {
      */
     public static void main(String[] args) {
         ArrayList<Student> students = InputReaderSingleton.getStudents();
+        ArrayList<Course> courses = InputReaderSingleton.getCourses();
         for (Student s: students)
             System.out.println(s.getId() + " - " + s.getName());
+        for (Course c: courses)
+            System.out.println(c.getCourseCode() + " - " + c.getSectionNumber());
     }
     
 }
