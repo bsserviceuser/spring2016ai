@@ -33,6 +33,19 @@ public class OptimizedBacktrackingNQueenSolver extends NQueenSolver {
         else return null;
     }
     
+    private int[] getRandomOrder(int n) {
+        int order[] = new int[n];
+        for (int i = 0; i < n; i++)
+            order[i] = i;
+        for (int i = 0; i < n; i++) {
+            int j = (int) (Math.random() * n);
+            int temp = order[i];
+            order[i] = order[j];
+            order[j] = temp;
+        }
+        return order;
+    }
+    
     public void backtrack(int positions[], int currentColumn) {
         if (currentColumn >= positions.length) {
             solutionFound = true;
@@ -41,8 +54,11 @@ public class OptimizedBacktrackingNQueenSolver extends NQueenSolver {
         
         if (solutionFound)
             return;
-        
-        for (int currentRow = 0; currentRow < positions.length && !solutionFound; currentRow++) {
+    
+        int order[] = getRandomOrder(positions.length);
+//        for (int currentRow = 0; currentRow < positions.length && !solutionFound; currentRow++) {
+        for (int r = 0; r < positions.length && !solutionFound; r++) {
+            int currentRow = order[r];
             int diagonalNumber = currentColumn - currentRow + positions.length - 1;
             int inverseDiagonalNumber = (positions.length - 1 - currentColumn) - currentRow + positions.length - 1;
             

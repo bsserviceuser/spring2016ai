@@ -23,55 +23,51 @@ public class HillClimbingNQueenSolver extends NQueenSolver {
         }
     }
 
-    private int countConflicts(int positions[]) {
-        int conflicts = 0;
-        for (int currentColumn = 0; currentColumn < positions.length; currentColumn++) {
-            for (int previousColumn = 0; previousColumn < currentColumn; previousColumn++) {
-                int dx = currentColumn - previousColumn;
-                int dy = Math.abs(positions[currentColumn] - positions[previousColumn]);
-                if (dy == 0 || dy == dx) {
-                    conflicts++;
-                }
-            }
-        }
-        return conflicts;
-    }
-
     @Override
     public int[] getSolution(int n) {
         int positions[] = new int[n];
-        int bestPositions[] = new int[n];
+        int localBest[] = new int[n];
+        int globalBest[] = new int[n];
 
-        for (int i = 0; i < positions.length; i++) {
+        for (int i = 0; i < n; i++) {
             positions[i] = i;
+            globalBest[i] = i;
         }
+
         randomize(positions);
         System.out.printf("Initial Solution: %s\nConflicts: %d\n", Arrays.toString(positions), countConflicts(positions));
 
-        for (int tries = 0; tries < 1000; tries++) {
-            System.arraycopy(positions, 0, bestPositions, 0, positions.length);
-            int minConflicts = countConflicts(positions);
+        for (int tries = 0; tries < 100; tries++) {
+            System.arraycopy(positions, 0, localBest, 0, n);
+            int minConflicts = countConflicts(localBest);
+            if (minConflicts == 0)
+                break;
             int tempPositions[] = new int[n];
 
-            for (int r = 0; r < positions.length; r++) {
-                for (int c = 0; c < positions.length; c++) {
-                    System.arraycopy(positions, 0, tempPositions, 0, positions.length);
+            for (int c = 0; c < n; c++) {
+                for (int r = 0; r < n; r++) {
+                    System.arraycopy(positions, 0, tempPositions, 0, n);
                     tempPositions[c] = r;
                     int tempConflicts = countConflicts(tempPositions);
                     if (tempConflicts < minConflicts) {
                         minConflicts = tempConflicts;
-                        System.arraycopy(tempPositions, 0, bestPositions, 0, positions.length);
+                        System.arraycopy(tempPositions, 0, localBest, 0, n);
                     }
                 }
             }
-            if (countConflicts(positions) > countConflicts(bestPositions)) {
-                System.arraycopy(bestPositions, 0, positions, 0, n);
+            if (countConflicts(localBest) < countConflicts(positions)) {
+                System.arraycopy(localBest, 0, positions, 0, n);
+                if (countConflicts(globalBest) > countConflicts(localBest)) {
+                    System.arraycopy(localBest, 0, globalBest, 0, n);
+                }
             } else {
                 randomize(positions);
             }
         }
-        System.out.printf("Updated Solution: %s\nConflicts: %d\n", Arrays.toString(bestPositions), countConflicts(bestPositions));
-        return null;
+        System.out.printf("Updated Solution: %s\nConflicts: %d\n", Arrays.toString(globalBest), countConflicts(globalBest));
+        for (int i = 0; i < n; i++) {
+            globalBest[i]++;
+        }
+        return globalBest;
     }
-
 }

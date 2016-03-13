@@ -6,6 +6,10 @@
 package bd.ac.seu.model;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.primefaces.json.JSONException;
+import org.primefaces.json.JSONObject;
 
 /**
  *
@@ -33,7 +37,26 @@ public class Student {
     public ArrayList<Course> getRegisteredCourses() {
         return registeredCourses;
     }
+
+    @Override
+    public String toString() {
+        return id;
+    }
     
+    public void addCourse(Course course) {
+        registeredCourses.add(course);
+    }
     
+    public JSONObject toJSONObject() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("ID", id);
+            jsonObject.put("Name", name);
+            jsonObject.put("Registered Courses", registeredCourses);
+        } catch (JSONException ex) {
+            Logger.getLogger(Course.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return jsonObject;
+    }    
     
 }
