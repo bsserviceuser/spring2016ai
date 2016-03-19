@@ -17,6 +17,7 @@ import org.primefaces.json.JSONObject;
  */
 public class Course {
     private String courseCode;
+    private Course alternateCourse;
     private String courseTitle;
     private int sectionNumber;
     private Faculty courseTeacher;
@@ -30,6 +31,7 @@ public class Course {
         courseTeacher = null;
         registeredStudents = new ArrayList<>();
         examSlot = null;
+        alternateCourse = null;
     }
 
     public String getCourseCode() {
@@ -66,6 +68,7 @@ public class Course {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("Course Code", courseCode);
+            jsonObject.put("Alternate Course Code", alternateCourse);
             jsonObject.put("Title", courseTitle);
             jsonObject.put("Section", sectionNumber);
             jsonObject.put("Faculty", courseTeacher);
@@ -83,6 +86,10 @@ public class Course {
     
     public void setCourseTeacher(Faculty courseTeacher) {
         this.courseTeacher = courseTeacher;
+    }
+
+    public void setAlternateCourse(Course alternateCourse) {
+        this.alternateCourse = alternateCourse;
     }
 
 }
