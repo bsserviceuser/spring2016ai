@@ -42,14 +42,19 @@ public class InputReaderSingleton {
         rooms = new ArrayList<>();
         examSlots = new ArrayList<>();
 
+        System.out.println("Reading input");
         readFaculties();
         readStudents();
+        System.out.println("Reading courses");
         readCourses();
+        System.out.println("Done reading courses");
         readRegistrations();
         readRooms();
         readExamSlots();
         readAvailableRooms();
+        System.out.println("Reading alternate courses");
         readAlternateCourses();
+        System.out.println("Done reading alternate courses");
     }
 
     public static ArrayList<Course> getCourses() {
@@ -74,10 +79,10 @@ public class InputReaderSingleton {
 
     private void readCourses() {
         try {
-            URL jsonURL = new URL("http://my.seu.ac.bd/~kmhasan/_WebServices_/list_courses.php");
-            BufferedReader input = new BufferedReader(new InputStreamReader(jsonURL.openStream()));
+//            URL jsonURL = new URL("http://my.seu.ac.bd/~kmhasan/_WebServices_/list_courses.php");
+//            BufferedReader input = new BufferedReader(new InputStreamReader(jsonURL.openStream()));
             // uncomment the following line if reading from a local file
-            // RandomAccessFile input = new RandomAccessFile("courses.json", "r");
+             RandomAccessFile input = new RandomAccessFile("list_courses.json", "r");
             String json = "";
 
             while (true) {
@@ -115,10 +120,10 @@ public class InputReaderSingleton {
 
     private void readStudents() {
         try {
-            URL jsonURL = new URL("http://my.seu.ac.bd/~kmhasan/_WebServices_/list_students.php");
-            BufferedReader input = new BufferedReader(new InputStreamReader(jsonURL.openStream()));
+//            URL jsonURL = new URL("http://my.seu.ac.bd/~kmhasan/_WebServices_/list_students.php");
+//            BufferedReader input = new BufferedReader(new InputStreamReader(jsonURL.openStream()));
             // uncomment the following line if reading from a local file
-            // RandomAccessFile input = new RandomAccessFile("students.json", "r");
+            RandomAccessFile input = new RandomAccessFile("list_students.json", "r");
             String json = "";
 
             while (true) {
@@ -148,10 +153,10 @@ public class InputReaderSingleton {
 
     private void readRegistrations() {
         try {
-            URL jsonURL = new URL("http://my.seu.ac.bd/~kmhasan/_WebServices_/list_registrations.php");
-            BufferedReader input = new BufferedReader(new InputStreamReader(jsonURL.openStream()));
+//            URL jsonURL = new URL("http://my.seu.ac.bd/~kmhasan/_WebServices_/list_registrations.php");
+//            BufferedReader input = new BufferedReader(new InputStreamReader(jsonURL.openStream()));
             // uncomment the following line if reading from a local file
-            // RandomAccessFile input = new RandomAccessFile("registrations.json", "r");
+             RandomAccessFile input = new RandomAccessFile("list_registrations.json", "r");
             String json = "";
 
             while (true) {
@@ -197,10 +202,10 @@ public class InputReaderSingleton {
 
     private void readFaculties() {
         try {
-            URL jsonURL = new URL("http://my.seu.ac.bd/~kmhasan/_WebServices_/list_faculties.php");
-            BufferedReader input = new BufferedReader(new InputStreamReader(jsonURL.openStream()));
+//            URL jsonURL = new URL("http://my.seu.ac.bd/~kmhasan/_WebServices_/list_faculties.php");
+//            BufferedReader input = new BufferedReader(new InputStreamReader(jsonURL.openStream()));
             // uncomment the following line if reading from a local file
-            // RandomAccessFile input = new RandomAccessFile("faculties.json", "r");
+             RandomAccessFile input = new RandomAccessFile("list_faculties.json", "r");
             String json = "";
 
             while (true) {
@@ -230,10 +235,10 @@ public class InputReaderSingleton {
 
     private void readRooms() {
         try {
-            URL jsonURL = new URL("http://my.seu.ac.bd/~kmhasan/_WebServices_/list_rooms.php");
-            BufferedReader input = new BufferedReader(new InputStreamReader(jsonURL.openStream()));
+//            URL jsonURL = new URL("http://my.seu.ac.bd/~kmhasan/_WebServices_/list_rooms.php");
+//            BufferedReader input = new BufferedReader(new InputStreamReader(jsonURL.openStream()));
             // uncomment the following line if reading from a local file
-            // RandomAccessFile input = new RandomAccessFile("rooms.json", "r");
+             RandomAccessFile input = new RandomAccessFile("list_rooms.json", "r");
             String json = "";
 
             while (true) {
@@ -263,10 +268,10 @@ public class InputReaderSingleton {
 
     private void readExamSlots() {
         try {
-            URL jsonURL = new URL("http://my.seu.ac.bd/~kmhasan/_WebServices_/list_examslots.php");
-            BufferedReader input = new BufferedReader(new InputStreamReader(jsonURL.openStream()));
+//            URL jsonURL = new URL("http://my.seu.ac.bd/~kmhasan/_WebServices_/list_examslots.php");
+//            BufferedReader input = new BufferedReader(new InputStreamReader(jsonURL.openStream()));
             // uncomment the following line if reading from a local file
-            // RandomAccessFile input = new RandomAccessFile("examslots.json", "r");
+             RandomAccessFile input = new RandomAccessFile("list_examslots.json", "r");
             String json = "";
 
             while (true) {
@@ -299,10 +304,10 @@ public class InputReaderSingleton {
 
     private void readAvailableRooms() {
         try {
-            URL jsonURL = new URL("http://my.seu.ac.bd/~kmhasan/_WebServices_/list_roomavailabilities.php");
-            BufferedReader input = new BufferedReader(new InputStreamReader(jsonURL.openStream()));
+//            URL jsonURL = new URL("http://my.seu.ac.bd/~kmhasan/_WebServices_/list_roomavailabilities.php");
+//            BufferedReader input = new BufferedReader(new InputStreamReader(jsonURL.openStream()));
             // uncomment the following line if reading from a local file
-            // RandomAccessFile input = new RandomAccessFile("roomavailabilities.json", "r");
+             RandomAccessFile input = new RandomAccessFile("list_roomavailabilities.json", "r");
             String json = "";
 
             while (true) {
@@ -353,10 +358,10 @@ public class InputReaderSingleton {
 
     private void readAlternateCourses() {
         try {
-            URL jsonURL = new URL("http://my.seu.ac.bd/~kmhasan/_WebServices_/list_alternatecourses.php");
-            BufferedReader input = new BufferedReader(new InputStreamReader(jsonURL.openStream()));
+//            URL jsonURL = new URL("http://my.seu.ac.bd/~kmhasan/_WebServices_/list_alternatecourses.php");
+//            BufferedReader input = new BufferedReader(new InputStreamReader(jsonURL.openStream()));
             // uncomment the following line if reading from a local file
-            // RandomAccessFile input = new RandomAccessFile("alternatecourses.json", "r");
+             RandomAccessFile input = new RandomAccessFile("list_alternatecourses.json", "r");
             String json = "";
 
             while (true) {
@@ -381,16 +386,16 @@ public class InputReaderSingleton {
                 Course alternateCourse = null;
 
                 for (Course c : courses) {
-                    for (Course a : courses) {
-                        if (c.getCourseCode().equals(courseCode)
-                                && a.getCourseCode().equals(alternateCourse)
-                                && c.getCourseTeacher().getInitials().equals(a.getCourseTeacher().getInitials())) {
-                            course = c;
-                            alternateCourse = a;
+                    if (c.getCourseCode().equals(courseCode)) {
+                        for (Course a : courses) {
+                            if (c != a && a.getCourseCode().equals(alternateCourseCode)
+                                    && c.getCourseTeacher().getInitials().equals(a.getCourseTeacher().getInitials())) {
+                                course = c;
+                                alternateCourse = a;
+                            }
                         }
                     }
                 }
-
                 if (course != null && alternateCourse != null) {
                     course.setAlternateCourse(alternateCourse);
                 }
