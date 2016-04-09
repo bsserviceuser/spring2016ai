@@ -5,6 +5,8 @@
  */
 package minimax.algorithm;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author kmhasan
@@ -136,14 +138,14 @@ public class State {
         }
     }
 
-    public State getNextState(int row, int col) {
+    public State getNextState(Action action) {
         State newState;
         if (currentPlayer == 'X')
             newState = new State(board, 'O');
         else newState = new State(board, 'X');
-        if (newState.board[row][col] != '.')
+        if (newState.board[action.getRow()][action.getCol()] != '.')
             return null;
-        newState.board[row][col] = currentPlayer;
+        newState.board[action.getRow()][action.getCol()] = currentPlayer;
         return newState;
     }
     
@@ -162,6 +164,16 @@ public class State {
 
     public char getCurrentPlayer() {
         return currentPlayer;
+    }
+    
+    public ArrayList<Action> getActions() {
+        int n = board.length;
+        ArrayList<Action> actions = new ArrayList<>();
+        for (int r = 0; r < n; r++)
+            for (int c = 0; c < n; c++)
+                if (board[r][c] == '.')
+                    actions.add(new Action(r, c));
+        return actions;
     }
     
     public String toString() {
